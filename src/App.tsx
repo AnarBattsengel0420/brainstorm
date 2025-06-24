@@ -1,8 +1,12 @@
+import { RouterProvider } from 'react-router-dom';
+import { router } from './routes/router';
+import './index.css';
+
 function App() {
   return (
-    <>
-      <div className="text-blue-800">Brainstorm</div>
-    </>
+    <div className="App">
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
