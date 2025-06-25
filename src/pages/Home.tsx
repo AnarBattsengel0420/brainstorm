@@ -61,15 +61,15 @@ const Home: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                   <div className="bg-white p-6 rounded-lg shadow">
                     <h3 className="text-lg font-semibold mb-2">Projects</h3>
-                    <p className="text-gray-600">Manage your brainstorming projects</p>
+                    <p className="text-gray-600">q</p>
                   </div>
                   <div className="bg-white p-6 rounded-lg shadow">
                     <h3 className="text-lg font-semibold mb-2">Ideas</h3>
-                    <p className="text-gray-600">Capture and organize your ideas</p>
+                    <p className="text-gray-600">w</p>
                   </div>
                   <div className="bg-white p-6 rounded-lg shadow">
                     <h3 className="text-lg font-semibold mb-2">Collaborate</h3>
-                    <p className="text-gray-600">Work with your team</p>
+                    <p className="text-gray-600">e</p>
                   </div>
                 </div>
               </div>

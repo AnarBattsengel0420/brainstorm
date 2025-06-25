@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { supabase } from '../../lib/supabase'; 
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -9,28 +10,36 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
+  e.preventDefault();
+  setIsLoading(true);
+  setError('');
 
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Mock authentication logic
-      if (email && password) {
-        // Store auth token or user data
-        localStorage.setItem('authToken', 'mock-token');
-        navigate('/');
-      } else {
-        setError('Please fill in all fields');
+  if (!email || !password) {
+    setError('Please fill in all fields');
+    setIsLoading(false);
+    return;
+  }
+
+  try {
+    const { data, error: loginError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (loginError) {
+      setError('Email or password is incorrect');
+    } else {
+      if (data?.session?.access_token) {
+        localStorage.setItem('authToken', data.session.access_token);
       }
-    } catch (err) {
-      setError('Login failed. Please try again.');
-    } finally {
-      setIsLoading(false);
+      navigate('/');
     }
-  };
+  } catch (err) {
+    setError('An error occurred while logging in');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
